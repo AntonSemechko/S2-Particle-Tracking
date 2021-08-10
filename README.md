@@ -2,12 +2,12 @@
 
 The functions contained in this package perform particle tracking and ray-triangle intersection queries
 on triangular surface meshes of a unit sphere (S^2), and can be readily incorporated into applications
-that need to perform fast, simultaneously tracking of thousands of particles on S^2. Some examples of
+that need to perform fast, simultaneously tracking of thousands of particles. Some examples of
 applications where I have used these functions are:
 
   - Reparameterization of closed genus 0 surface meshes for nonrigid surface registration
-  - Interpolation of S^2 scalar and vector fields
-  - Numerical integration on S^2  
+  - Interpolation of S^2 vector and scalar fields 
+  - Numerical integration  
 
 ## Description of Main Functions  
 
@@ -18,28 +18,27 @@ The two main functions:
 
 are built around Möller & Trumbore ray-triangle intersection algorithm [[1]], with additional
 modifications which produce substantial speed-up when thousands or even millions of repeated 
-queries must be performed relative to a fixed spherical mesh. Significant effort went into optimizing
-performance of these functions by:
+queries are performed relative to a fixed spherical mesh. Significant effort went into optimizing
+performance by:
 
 - removing computational overhead by precomputing "static" variables that would otherwise have to be
 recomputed during every call to the main functions, and
 
 - using space partitioning methods to reduce the number of ray-triangle intersection tests 
 
-I experimented with two different approaches for partitioning S^2 using (a) overlapping charts and (b)
+I experimented with two different approaches for partitioning the sphere using (a) overlapping charts and (b)
 spherical grids, each corresponding to a different function (see above). The first of these uses
 nearest-neighbor search and exploits the built-in [`pointLocation`] function to assign particles/rays 
 to mesh triangles stereographically mapped onto a plane (see `SphericalTriangleIntersection_UsignStereoProj.m`), 
 while the second attempts to improve performance by reducing the number of ray-triangle intersection
 tests using binning (see `SphericalTriangleIntersection.m`). In order to speed-up the the queries, both
-functions employ auto-generated data structures which they re-use during all subsequent functional calls.
-
+functions employ auto-generated data structures which they re-use during subsequent functional calls.
 
 Benchmark tests (see `s2_ray_triangle_intersection_benchmark_test.m`) revealed that
-`SphericalTriangleIntersection_UsignStereoProj.m` is the most efficient of the two functions (up to 60
-times faster) and that the gap in performance of the two functions increases with increasing number of
-simultaneous positional queries and complexity of the mesh. Here are the performance curves of the two
-functions (computed on machine with i7-4940MX CPU, 32 GB RAM, R2020a Matlab):
+`SphericalTriangleIntersection_UsignStereoProj.m` is the fastest (up to 60 times) of the two functions
+and that the gap in performance of the two functions increases with increasing number of simultaneous
+positional queries and complexity of the mesh. Here are the performance curves of the two functions
+(based on i7-4940MX CPU, 32 GB RAM, R2020a Matlab):
 
 ![](benchmark_performance_curves.jpg)
 
@@ -51,10 +50,10 @@ download the [S2 Sampling Toolbox] and add it to your Matlab path.
 ## Example
  
 Given a triangular surface mesh representation of a unit sphere and a set of points on a unit sphere (or equivalently, a set of
-rays emanating from the origin), the functions (a) and (b) return list of triangles containing the points
+rays emanating from the origin), the functions (a) and (b) return list of triangles containing the queried points
 along with the corresponding planar and spherical barycentric coordinates [[2]]. This information, for example, can be used to 
 evaluate values of piecewise linear functions defined at the mesh vertices. The function `s2_particle_tracking_demo`
-illustrates the use of (a) for integrating trajectories of particles immersed in randomly generated velocity fields.
+illustrates the use of (a) and (b) for integrating trajectories of particles immersed in randomly generated velocity fields.
   
 ![](s2_particle_tracking_demo.gif)
 

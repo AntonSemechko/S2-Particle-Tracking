@@ -1,3 +1,4 @@
 *.asv
+preview.jpg
 S2_random_trajectory.m
 generate_random_S2_velocity_fields.m
