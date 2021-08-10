@@ -1,5 +1,7 @@
 # S^2 Particle Tracking
 
+[![View S2-Particle-Tracking on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/97362-s2-particle-tracking)
+
 The functions contained in this package perform particle tracking and ray-triangle intersection queries
 on triangular surface meshes of a unit sphere (S^2), and can be readily incorporated into applications
 that need to perform fast, simultaneously tracking of thousands of particles. Some examples of
@@ -31,8 +33,8 @@ spherical grids, each corresponding to a different function (see above). The fir
 nearest-neighbor search and exploits the built-in [`pointLocation`] function to assign particles/rays 
 to mesh triangles stereographically mapped onto a plane (see `SphericalTriangleIntersection_UsignStereoProj.m`), 
 while the second attempts to improve performance by reducing the number of ray-triangle intersection
-tests using binning (see `SphericalTriangleIntersection.m`). In order to speed-up the the queries, both
-functions employ auto-generated data structures which they re-use during subsequent functional calls.
+tests using binning (see `SphericalTriangleIntersection.m`). Both functions employ auto-generated data
+structures which they re-use during recurrent positional queries.
 
 Benchmark tests (see `s2_ray_triangle_intersection_benchmark_test.m`) revealed that
 `SphericalTriangleIntersection_UsignStereoProj.m` is the fastest (up to 60 times) of the two functions
@@ -51,7 +53,7 @@ The main functions require [S2 Sampling Toolbox] to work. Before using them make
 Given a triangular surface mesh representation of a unit sphere and a set of points on a unit sphere (or equivalently, a set of
 rays emanating from the origin), the functions (a) and (b) return list of triangles containing the queried points
 along with the corresponding planar and spherical barycentric coordinates [[2]]. This information, for example, can be used to 
-evaluate values of piecewise linear functions defined at the mesh vertices. The function `s2_particle_tracking_demo`
+evaluate piecewise linear functions defined at the mesh vertices. The function `s2_particle_tracking_demo`
 illustrates the use of (a) and (b) for integrating trajectories of particles immersed in randomly generated velocity fields.
   
 ![](s2_particle_tracking_demo.gif)
