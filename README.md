@@ -36,16 +36,15 @@ functions employ auto-generated data structures which they re-use during subsequ
 
 Benchmark tests (see `s2_ray_triangle_intersection_benchmark_test.m`) revealed that
 `SphericalTriangleIntersection_UsignStereoProj.m` is the fastest (up to 60 times) of the two functions
-and that the gap in performance of the two functions increases with increasing number of simultaneous
-positional queries and complexity of the mesh. Here are the performance curves of the two functions
-(based on i7-4940MX CPU, 32 GB RAM, R2020a Matlab):
+and that the gap in performance increases with increasing number of simultaneous positional queries and
+complexity of the mesh. Here are the performance curves of the two functions (based on i7-4940MX CPU, 32 GB RAM, R2020a Matlab):
 
 ![](benchmark_performance_curves.jpg)
 
 ## Dependencies
 
-The main functions require [S2 Sampling Toolbox] to work. Before using the main functions make sure to
-download the [S2 Sampling Toolbox] and add it to your Matlab path.
+The main functions require [S2 Sampling Toolbox] to work. Before using them make sure to download the
+[S2 Sampling Toolbox] and add it to your Matlab path.
 
 ## Example
  

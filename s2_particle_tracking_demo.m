@@ -116,12 +116,12 @@ Pr(2:3:end,:)=1.1*P;
 h2=plot3(ha1,Pr(:,1),Pr(:,2),Pr(:,3),'-b','LineWidth',2); % trajectories
 
 
-drawnow
-pause(0.2)
-im=export_fig('-nocrop','-r100','-silent');
-imwrite(im,'img_00.jpg');
-[A,map] = rgb2ind(im,256);
-imwrite(A,map,'s2_particle_tracking_demo.gif','gif','LoopCount',Inf,'DelayTime',0.1);
+%drawnow
+%pause(0.2)
+%im=export_fig('-nocrop','-r100','-silent');
+%imwrite(im,'img_00.jpg');
+%[A,map] = rgb2ind(im,256);
+%imwrite(A,map,'s2_particle_tracking_demo.gif','gif','LoopCount',Inf,'DelayTime',0.1);
 
 
 % Integrate particle positions forward in time  
@@ -187,7 +187,7 @@ while cnt<1E5
 
         
         % grab a gif frame
-        if mod(cnt,5)==0 && k<35 %&& false
+        if mod(cnt,5)==0 && k<35 && false
             k=k+1;
             
             drawnow
